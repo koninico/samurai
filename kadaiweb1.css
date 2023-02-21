@@ -22,19 +22,24 @@ main {
   display: flex;
   justify-content: space-around;
   background-color: #F8F9FA;
-  text-decoration: none;
   list-style: none;
   padding: 10px;
   margin: 0;
 }
-.navbar ul li {
+
+.navbar ul li{
+
+}
+
+a {
+  text-decoration: none;
+  color: #000;
 }
 .flexbox-item01 {
   background-color: #3A3E71;
   display: flex;
   height: 100px;
 }
-
 footer {
   height: 20px;
   background-color: #00A5BB;
