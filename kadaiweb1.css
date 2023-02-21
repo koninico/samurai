@@ -44,3 +44,15 @@ footer {
   height: 20px;
   background-color: #00A5BB;
 }
+
+.row {
+  display: flex;
+}
+.col-5 {
+  width: 50%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
