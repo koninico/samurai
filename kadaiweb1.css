@@ -48,7 +48,7 @@ img {
   height: auto;
 }
 
-.SERVICE {
+.SERVICE,.WORKS {
   width: 100%;
   background-color: bisque;
 }
@@ -61,7 +61,7 @@ img {
 }
 
 .CONTACT {
-  margin: 0;
+  margin: 20px 0 0 0;
   padding: 5px;
   background-color: green;
 }
