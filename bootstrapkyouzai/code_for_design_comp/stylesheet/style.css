@@ -1,0 +1,115 @@
+/* ----------------------------------------------- 共通 */
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  color: #000000;
+  font-family: 'Noto Sans JP', sans-serif;
+  padding-bottom: 0;
+
+}
+
+p {
+  line-height: 2.0em;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 14px;
+
+}
+
+
+
+/* ----------------------------------------------- ナビゲーションバー */
+.navbar_brand_logo {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.my_navbar_brand,.my_nav_link {
+  font-size: 16px;
+  font-family: 'Lora',serif;
+  color: #000000 !important;
+}
+
+.navbar-toggler {
+  padding: 0;important;
+  border: none;
+}
+
+#hamburger_btn_check:checked~.hamburger_btn .btn_close {
+  display: block;
+}
+
+#hamburger_btn_check:checked~.hamburger_btn .btn_open {
+  display: none;
+}
+
+.btn_close {
+  display: none;
+}
+
+#hamburger_btn_check {
+  display: none;
+}
+
+/* ----------------------------------------------- カールセル */
+
+.my_carousel_caption {
+  font-size: 52px;
+  margin:1.25rem 0;
+  color: #fff;
+  text-align: center;
+  font-family: 'Lora',serif;
+  line-height: 1.5em;
+}
+
+.my_carousel_caption::before {
+  content: url(../img/logoSymbol_White.png);
+  display: block;
+}
+
+@media screen and (max-width:375px) {
+  .my_carousel_caption {
+    font-size: 27px;
+  }
+}
+
+
+
+
+
+/* ----------------------------------------------- アバウト */
+
+
+
+
+
+/* ----------------------------------------------- ギャラリー */
+
+
+
+
+
+/* ----------------------------------------------- メニュー */
+
+
+
+
+
+/* ----------------------------------------------- レビュー */
+
+
+
+
+
+/* ----------------------------------------------- アクセス */
+
+
+
+
+
+/* ----------------------------------------------- フッター */
