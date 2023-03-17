@@ -11,6 +11,19 @@
     .disabled {
       color: rgb(182, 182, 182);
     }
+
+    td:first-child {
+    color: red;
+    }
+
+    td:last-child {
+    color: blue;
+    }
+
+    td.new Date {
+    color: green;
+    }
+
   </style>
 </head>
 <body>
@@ -79,13 +92,14 @@ function createCalendar(year, month) {
   let dayCount = 1 // 日にちのカウント
   let calendarHtml = '' // HTMLを組み立てる変数
   
-  calendarHtml += '<h2>' + year  + '/' + month + '</h1>'
+  calendarHtml += '<h2>' + year  + '/' + month + '</h2>'
   calendarHtml += '<table class="table">'
   
   // 曜日の行を作成
   calendarHtml += '<tr>'
   for (let i = 0; i < weeks.length; i++) {
-    calendarHtml += '<td>' + weeks[i] + '</td>'
+    calendarHtml += '<td>' + weeks[i] + '</td>'    // weeks[6].style.color = 'blue';    // weeks[7].style.color = 'red';
+
   }
   calendarHtml += '</tr>'
   for (let w = 0; w < 6; w++) {
@@ -93,7 +107,7 @@ function createCalendar(year, month) {
     for (let d = 0; d < 7; d++) {
       if (w == 0 && d < startDay) {
         // 1行目で1日の曜日の前
-        let num = lastMonthendDayCount - startDay + d + 1
+        let num = lastMonthendDayCount - startDay + d + 2
         calendarHtml += '<td class="disabled">' + num + '</td>'
       } else if (dayCount > endDayCount) {
         // 末尾の日数を超えた
