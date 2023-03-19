@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>Lesson8</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1>Lesson8</h1>
+  <ul id="users"></ul>
+</div>
+
+<div class="text-center">
+  <h1>
+    <script>
+      document.write( calc(1, 2) );
+    
+      function calc(a, b) {
+        let answer = a + b;
+        console.log(answer);
+        return answer;
+      }
+    </script>
+  </h1>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+
+  const personalData = [ // 第一階層が配列
+    { name: '侍太郎', age: 36, gender: '男性', address: '東京都', phoneNumber: '070-0809-1160' }, // 第2階層はオブジェクト
+    { name: '侍花子', age: 33, gender: '女性', address: '京都府', phoneNumber: '999-9999-9999' } // 第2階層はオブジェクト
+  ];
+
+  let users = document.getElementById("users");
+  personalData.forEach( v => {
+    let li = document.createElement("li");
+    li.classList.add("list-group-item");
+    li.innerHTML = "";
+    li.innerHTML += "名前：";
+    li.innerHTML += v.name;
+    li.innerHTML += " 年齢：";
+    li.innerHTML += v.age;
+    users.append(li);
+  });
+
+  console.log(personalData);
+
+</script>
+</body>
+</html>
