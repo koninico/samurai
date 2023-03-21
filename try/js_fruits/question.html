@@ -32,11 +32,11 @@
     <div class="card-body">
       <p>フルーツ達は</p>
       <ul id="fruitsList" class="list-group list-group-horizontal">
-        <li class="list-group-item">dummy</li>
-        <li class="list-group-item">dummy</li>
-        <li class="list-group-item">dummy</li>
-        <li class="list-group-item">dummy</li>
-        <li class="list-group-item">dummy</li>
+        <li class="list-group-item"></li>
+        <li class="list-group-item"></li>
+        <li class="list-group-item"></li>
+        <li class="list-group-item"></li>
+        <li class="list-group-item"></li>
       </ul>
       <small>※「dummy」は消してね!</small>
     </div>
@@ -105,6 +105,15 @@
 let fruits = ['メロン', 'りんご', 'みかん', 'いちご', 'バナナ'];
 let colors = ['green', 'pink', 'orange', 'red', 'yellow'];
 let number = Math.floor(Math.random () * fruits.length);
+
+
+
+for (let i = 0 ; i<fruits.length; i++){
+  console.log(fruits[i]);
+  // const fruitsfield = document.getElementsByClassName('list-group-item');
+  // fruitsfield.textContent =  list-group-item;
+}
+
 
 $(function(){
   changeFruits();

@@ -36,6 +36,6 @@ document.addEventListener('keypress',keyPress)
 const rankCheck = score => {};
 
 const gameOver = id => {};
-
 const timer = () => {};
+
 
