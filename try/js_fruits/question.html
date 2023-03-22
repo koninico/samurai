@@ -53,7 +53,7 @@
       上課題同様にフルーツの表示と、さらに let colors を利用してフルーツたちに色をつけよう！
     </div>
     <div class="card-body">
-      <ul id="fruitsListColor" class="list-group list-group-horizontal">
+      <ul id="fruitsListColor" class="list-group-horizontal">
         <li class="list-group-item">dummy</li>
         <li class="list-group-item">dummy</li>
         <li class="list-group-item">dummy</li>
@@ -109,10 +109,12 @@ let number = Math.floor(Math.random () * fruits.length);
 
 
 for (let i = 0 ; i<fruits.length; i++){
-  console.log(fruits[i]);
-  // const fruitsfield = document.getElementsByClassName('list-group-item');
-  // fruitsfield.textContent =  list-group-item;
-}
+  let fruitsListColor = document.getElementById("fruitsListColor");
+  let li = document.createElement('li');
+  li.classList.add('list-group-item');
+  li.innerHTML = number;
+  fruitsListColor.append(li);
+};
 
 
 $(function(){
