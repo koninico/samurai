@@ -32,11 +32,7 @@
     <div class="card-body">
       <p>フルーツ達は</p>
       <ul id="fruitsList" class="list-group list-group-horizontal">
-        <li class="list-group-item"></li>
-        <li class="list-group-item"></li>
-        <li class="list-group-item"></li>
-        <li class="list-group-item"></li>
-        <li class="list-group-item"></li>
+
       </ul>
       <small>※「dummy」は消してね!</small>
     </div>
@@ -54,11 +50,7 @@
     </div>
     <div class="card-body">
       <ul id="fruitsListColor" class="list-group-horizontal">
-        <li class="list-group-item">dummy</li>
-        <li class="list-group-item">dummy</li>
-        <li class="list-group-item">dummy</li>
-        <li class="list-group-item">dummy</li>
-        <li class="list-group-item">dummy</li>
+
       </ul>
       <small>※「dummy」は消してね!</small>
     </div>
@@ -107,15 +99,23 @@ let colors = ['green', 'pink', 'orange', 'red', 'yellow'];
 let number = Math.floor(Math.random () * fruits.length);
 
 
+let fruitsList = document.getElementById("fruitsList");
 
 for (let i = 0 ; i<fruits.length; i++){
-  let fruitsListColor = document.getElementById("fruitsListColor");
+  let li = document.createElement('li');
+  li.classList.add('list-group-item');
+  li.innerHTML = fruits[number];
+  fruitsList.append(li);
+};
+
+let fruitsListColor = document.getElementById("fruitsListColor");
+
+for (let i = 0 ; i<fruits.length; i++){
   let li = document.createElement('li');
   li.classList.add('list-group-item');
   li.innerHTML = fruits[number];
   fruitsListColor.append(li);
 };
-
 
 $(function(){
   changeFruits();
