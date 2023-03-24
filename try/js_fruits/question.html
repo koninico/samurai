@@ -119,18 +119,32 @@ for (let i = 0 ; i<fruits.length; i++){
   li.style.backgroundColor = colors[i];
 };
 
-// $(function(){
-//   changeFruits();
-// });
+$(function(){
+  changeFruits();
+});
 
-// function changeFruits(){
-//   let exportFruits = $("#exportFruits");
-//     if(number < 100) = exportFruits.text('メロン');
-//     else if(number < 70) =  exportFruits.text('りんご');
-//     else if(number < 50) =  exportFruits.text('みかん');
-//     else if(number < 30) =  exportFruits.text('いちご');
-//     else if(number < 10) =  exportFruits.text('バナナ');
-//   };
+function changeFruits(){
+  let exportFruits = $("#exportFruits");
+    if(number < 10) {
+       exportFruits.text('バナナ');
+    }
+
+    else if(number < 30) {
+       exportFruits.text('いちご');
+    }
+
+    else if(number < 50) {
+       exportFruits.text('みかん');
+    }
+
+    else if(number < 70) {
+        exportFruits.text('りんご')
+        }
+
+    else if(number < 100) {
+       exportFruits.text('メロン');
+    }
+  };
 
 </script>
 </body>
