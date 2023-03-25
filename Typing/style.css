@@ -24,3 +24,10 @@ body {
 .mistyped {
   background-color:  red;
 }
+
+.timer-set-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
