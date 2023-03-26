@@ -1,14 +1,20 @@
+let untyped = '';
+let typed = '';
+let score = 0;
+
+//2.変数numberにindex.html2の12行目input type=numberの値を代入したいのですがうまくつながりません。
+let number = document.getElementById('count');
+
 const untypedfield = document.getElementById('untyped');
 const typedfield = document.getElementById('typed');
 const wrap = document.getElementById('wrap');
 const start = document.getElementById('start');
-const count = document.getEgetElementById('count');
+let count = document.getElementById('count');
 
+//1.numberの部分を数値に書き換えるとその数値の秒数でカウントされるようになりました。
+const countfield = document.getElementById('count');
+countfield.innerHTML = number;
 
-let untyped = '';
-let typed = '';
-let score = 0;
-let number = '';
 
 const textLists = [
   'Hello World','This is my App','How are you?',
