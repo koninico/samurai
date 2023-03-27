@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <p>Please enter your name</p>
+  <input type = "text" name="name" value="Your name" onchange="myfunc(this.value)">
+  <div id="textarea"></div>
+  <script>
+    const textarea = document.getElementById('textarea');
+    myfunc = (value) => {
+      textarea.innerHTML = "Your name is " + value;
+    };
+  </script>
+  
+</body>
+</html>
