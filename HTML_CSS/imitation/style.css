@@ -1,0 +1,32 @@
+.body {
+  font-family: ;
+}
+
+.nav {
+  display: flex;
+}
+
+.content {
+  display: flex;
+}
+
+.main {
+  width: 100%;
+}
+
+.works-picture {
+  display: flex;
+}
+
+.picture {
+  margin: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+}
+

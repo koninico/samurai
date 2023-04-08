@@ -1,0 +1,22 @@
+/*この中にコメントを書きます*/
+#first-heading, .text-red{
+  color: red;
+}
+
+#parent > p{
+  color: red;
+}
+
+.decoration{
+  /* ここにCSSを書いていきます */
+  /* 以下はカラーコードで色を指定しています */
+  text-align: center;
+}
+
+.text-bold{
+  font-weight: bold;
+}
+
+body{
+  font-family: "Arial","Meiryo",sans-serif;
+}

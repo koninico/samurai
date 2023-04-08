@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+}
+
+main {
+  padding: 50px;
+}
+
+.heading {
+  height:auto;
+  font-size: 20px;
+  background-color: #E9ECEF;
+  padding: 90px;
+}
+
+.navbar ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #F8F9FA;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+}
+
+.navbar ul li{
+
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.row {
+  display: flex;
+}
+
+.col-5 {
+  width: 50%;
+  margin: 10px;
+  word-break: break-all;
+  background-color: orange;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.SERVICE,.WORKS {
+  width: 100%;
+  background-color: bisque;
+}
+
+.col-6 {
+  width: 100%;
+  margin: 10px;
+  word-break: break-all;
+  background-color: blue;
+}
+
+.CONTACT {
+  margin: 20px 0 0 0;
+  padding: 5px;
+  background-color: green;
+}
+
+footer {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  background-color: #00A5BB;
+  color: #FFFFFF;
+}
