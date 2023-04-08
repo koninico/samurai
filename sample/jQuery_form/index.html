@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery Form</title>
+</head>
+
+<body>
+  <script>
+    $('#submit').on('click', function (event) {
+      // formタグによる送信を拒否
+      event.preventDefault();
+
+      // 入力チェックをした結果、エラーがあるかないか判定
+
+      let result = inputCheck();
+
+      // エラー判定とメッセージを取得
+      let error = result.error; // true or false
+      let message = result.message;
+    });
+
+    // エラーが無かったらフォームを送信する
+    if (error == false) {
+      // Ajaxでformを送信する
+      $.ajax({
+        url: 'https://api.staticforms.xyz/submit',
+        type: 'POST',
+        dataType: 'json',
+        data: $('#form').serialize(),
+        success: function (result) {
+          alert('お問い合わせを送信しました。')
+        },
+        error: function (xhr, resp, text) {
+          alert('お問い合わせを送信できませんでした。')
+        }
+      })
+    } else {
+      // エラーメッセージを表示する
+      alert(message);
+    }
+
+    function inputCheck() {
+      if ($('#tel').val() != '' && $('#tel').val().indexOf('-') == -1) {
+        // エラーあり
+        $('#tel').css('background-color', '#f79999');
+        error = true;
+        message += '電話番号に「-」が含まれていません。\n';
+      } else {
+        // エラーなし
+        $('#tel').css('background-color', '#fafafa');
+      }
+      // 個人情報のチェックボックスのチェック
+      if ($('#agree').prop('checked') == false) {
+        error = true;
+        message += '個人情報の取り扱いについてご同意いただける場合は、チェックボックスにチェックしてください。\n';
+      }
+      // エラーの有無で送信ボタンを切り替え
+      if (error == true) {
+        $('#submit').attr('src', 'images/button-submit.png');
+      } else {
+        $('#submit').attr('src', 'images/button-submit-blue.png');
+      }
+      // オブジェクトでエラー判定とメッセージを返す
+      result = {
+        error: error,
+        message: message
+      }
+      // 戻り値としてエラーがあるかどうかを返す
+      return result;
+    }
+  </script>
+</body>
+
+</html>
