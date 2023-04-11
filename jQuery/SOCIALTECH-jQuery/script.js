@@ -27,13 +27,13 @@ $(function(){
   // AjaxでSTATIC FORMSにデータを送信
   $('#submit').on('click', function (event) {
     // formタグによる送信を拒否
-    event.preventDefault();
+    event.preventDefault();  //ここのeventはクリックをしたらという意味。上のeventを引っ張っている。
   
     // 入力チェックをした結果、エラーがあるかないか判定
     let result = inputCheck();
 
     //エラー判定とメッセージを取得
-    let error = result.error;
+    let error = result.error;//falseかtrueを入れている
     let message = result.message;
 
     //エラーが無かったらフォームを送信する
