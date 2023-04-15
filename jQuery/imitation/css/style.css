@@ -114,6 +114,20 @@ footer p{
   padding-bottom: 20px;
   font-family: 'Noto Sans JP', sans-serif;
 }
+/* トップページに戻る */
+#back_btn{
+  padding: 28px 24px;
+  background-color:  #000;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 38px;
+  right: 20px;
+  font-family: 'Noto Sans JP', sans-serif;
+  display: none;
+}
 
 @media (max-width: 767px){
   .item {
