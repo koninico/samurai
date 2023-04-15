@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>給与計算くん</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="alert alert-primary mt-2 text-center">給与計算くん</h1>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="text-center">費目</th>
+          <th class="text-center">金額</th>
+          <th class="text-center">選択</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>給与</th>
+          <td><input type="text" name="salary" id="salary" class="form-control" value=""></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>通勤費</th>
+          <td><input type="text" name="commuting_fee" id="commuting_fee" class="form-control" value=""></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>総支給額</th>
+          <td id="total_amount_paid"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>健康保険</th>
+          <td id="health_insurance_fee"></td>
+          <td id="health_insurance_name"></td>
+        </tr>
+        <tr>
+          <th>厚生年金</th>
+          <td id="welfare_pension_insurance_fee"></td>
+          <td id="welfare_pension_insurance_name"></td>
+        </tr>
+        <tr>
+          <th>雇用保険</th>
+          <td id="employment_insurance_fee"></td>
+          <td><select name="employment_insurance" id="employment_insurance" class="form-control"></select></td>
+        </tr>
+        <tr>
+          <th>介護保険</th>
+          <td id="care_insurance_fee"></td>
+          <td><select name="care_insurance" id="care_insurance" class="form-control"></select></td>
+        </tr>
+        <tr>
+          <th>扶養人数</th>
+          <td></td>
+          <td><select name="dependents_persons" id="dependents_persons" class="form-control"></select></td>
+        </tr>
+        <tr>
+          <th>所得税</th>
+          <td id="income_tax_fee"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>住民税</th>
+          <td><input type="text" id="municipal_tax_fee" class="form-control"></td>
+          <td><a href="https://juuminzei.com/keisan/" target="_blank" class="btn btn-primary">住民税を計算する</a></td>
+        </tr>
+        <tr class="netPayment">
+          <th>差引支給額</th>
+          <td id="net_payment" class="h2"></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script>
+$(function() {
+
+/**
+  * 雇用保険セレクトボックス設定
+  */
+var file = 'json/employment_insurance.json';
+$.getJSON(file, function(data) {
+  data = data['data'];
+  for (item in data){
+    $("#employment_insurance").append($("<option>").val(data[item]['code']).text(data[item]['name'] + '(' + data[item]['fee1'] + ')'));
+  }
+});
+
+/**
+  * 介護保険セレクトボックス設定
+  */
+var file = 'json/generation.json';
+$.getJSON(file, function(data) {
+  data = data['data'];
+  for (item in data){
+    $("#care_insurance").append($("<option>").val(data[item]['code']).text(data[item]['name']));
+  }
+});
+
+/**
+  * 扶養人数セレクトボックス設定
+  */
+var file = 'json/dependents_persons.json';
+$.getJSON(file, function(data) {
+  data = data['data'];
+  for (item in data){
+    $("#dependents_persons").append($("<option>").val(data[item]['code']).text(data[item]['name']));
+  }
+});
+
+/**
+  * inputフィールドのフォーカス設定
+  */
+$('input[type=text]').focusin(function(e) {
+  $(this).css('background-color', '#ffc');
+}).focusout(function(e) {
+  $(this).css('background-color', '');
+});
+
+/**
+  * 給与が変更されたら
+  */
+$('#salary').change(function() {
+  totalAmountPaid();
+  setHealthInsurance();
+  setWelfarePensionInsurance();
+  setEmploymentInsurance();
+  setCareInsurance();
+  setTimeout(function(){setIncomeTax();},100);
+  setTimeout(function(){netPayment();},100);
+});
+
+/**
+  * 通勤費が変更されたら
+  */
+$('#commuting_fee').change(function() {
+  totalAmountPaid();
+  setHealthInsurance();
+  setWelfarePensionInsurance();
+  setEmploymentInsurance();
+  setCareInsurance();
+  setIncomeTax();
+  setTimeout(function(){setIncomeTax();},100);
+  setTimeout(function(){netPayment();},100);
+});
+
+/**
+  * 雇用保険が変更されたら
+  */
+$('#employment_insurance').change(function() {
+  setEmploymentInsurance();
+  setIncomeTax();
+  setTimeout(function(){setIncomeTax();},100);
+  setTimeout(function(){netPayment();},100);
+});
+
+/**
+  * 介護保険が変更されたら
+  */
+$('#care_insurance').change(function() {
+  setCareInsurance();
+  setTimeout(function(){setIncomeTax();},100);
+  setTimeout(function(){netPayment();},100);
+});
+
+/**
+  * 扶養人数が変更されたら
+  */
+$('#dependents_persons').change(function() {
+  setIncomeTax();
+  setTimeout(function(){setIncomeTax();},100);
+  setTimeout(function(){netPayment();},100);
+});
+
+/**
+  * 住民税が変更されたら
+  */
+$('#municipal_tax_fee').change(function() {
+  netPayment();
+});
+
+/**
+  * 総支給額 計算
+  */
+function totalAmountPaid(){
+  var salary = $('#salary').val();
+  var commuting_fee = $('#commuting_fee').val();
+  var total = Number(salary) + Number(commuting_fee);
+  $('#total_amount_paid').html(total);
+}
+
+/**
+  * 健康保険 等級 選択
+  */
+function setHealthInsurance(){
+  var salary = $('#salary').val();
+  var commuting_fee = $('#commuting_fee').val();
+  var total = Number(salary) + Number(commuting_fee);
+  var name = "";
+  var fee = 0;
+  var file = 'json/health_insurance.json';
+  $.getJSON(file, function(data) {
+    data = data['data'];
+    for (item in data){
+      if (Number(data[item]['up']) <= total && total < Number(data[item]['down'])) {
+        name = data[item]['name'];
+        fee = data[item]['feeHalf1'];
+      }
+    }
+    $('#health_insurance_name').html(name);
+    $('#health_insurance_fee').html(fee);
+  });
+}
+
+
+/**
+  * 厚生年金 等級 選択
+  */
+function setWelfarePensionInsurance(){
+  var salary = $('#salary').val();
+  var commuting_fee = $('#commuting_fee').val();
+  var total = Number(salary) + Number(commuting_fee);
+  var name = "";
+  var fee = 0;
+  var file = 'json/health_insurance.json';
+  $.getJSON(file, function(data) {
+    data = data['data'];
+    for (item in data){
+      if (Number(data[item]['up']) <= total && total < Number(data[item]['down'])) {
+        name = data[item]['name'];
+        fee = data[item]['feeHalf3'];
+      }
+    }
+    $('#welfare_pension_insurance_name').html(name);
+    $('#welfare_pension_insurance_fee').html(fee);
+  });
+}
+
+/**
+  * 雇用保険額 設定
+  */
+function setEmploymentInsurance(){
+  var salary = $('#salary').val();
+  var commuting_fee = $('#commuting_fee').val();
+  var total = Number(salary) + Number(commuting_fee);
+  var code = $('#employment_insurance').val();
+  var fee = 0;
+  var file = 'json/employment_insurance.json';
+  $.getJSON(file, function(data) {
+    data = data['data'];
+    for (item in data){
+      if (code == data[item]['code']) {
+        fee = data[item]['fee1'];
+      }
+    }
+    var price = Math.round(total * fee);
+    $('#employment_insurance_fee').html(price);
+  });
+}
+
+/**
+  * 介護保険額 設定
+  */
+function setCareInsurance(){
+  var salary = $('#salary').val();
+  var commuting_fee = $('#commuting_fee').val();
+  var total = Number(salary) + Number(commuting_fee);
+  var code = $('#care_insurance').val();
+  var fee = 0;
+  if (code == 2) {
+    var file = 'json/health_insurance.json';
+    $.getJSON(file, function(data) {
+      data = data['data'];
+      for (item in data){
+        if (Number(data[item]['up']) <= total && total < Number(data[item]['down'])) {
+          fee = data[item]['feeHalf2'] - data[item]['feeHalf1'];
+        }
+      }
+      $('#care_insurance_fee').html(fee);
+    });
+  }else{
+    $('#care_insurance_fee').html(fee);
+  }
+}
+
+/**
+  * 所得税額 設定
+  */
+function setIncomeTax(){
+  var salary = $('#salary').val();
+  var commuting_fee = $('#commuting_fee').val();
+  var total = Number(salary) + Number(commuting_fee);
+  var health_insurance = $('#health_insurance_fee').html();
+  var welfare_pension_insurance = $('#welfare_pension_insurance_fee').html();
+  var employment_insurance = $('#employment_insurance_fee').html();
+  var care_insurance = $('#care_insurance_fee').html();
+  var value = salary - health_insurance - welfare_pension_insurance - employment_insurance - care_insurance;
+  var code = $('#dependents_persons').val();
+  var name = 'f' + code;
+  var fee = 0;
+  var file = 'json/withholdingIncomeTax.json';
+  $.getJSON(file, function(data) {
+    data = data['data'];
+    for (item in data){
+      if (Number(data[item]['up']) <= value && value < Number(data[item]['down'])) {
+        fee = data[item][name];
+      }
+    }
+    $('#income_tax_fee').html(fee);
+  });
+}
+
+
+/**
+  * 差引支給額 計算
+  */
+function netPayment(){
+  var salary = $('#salary').val();
+  var commuting_fee = $('#commuting_fee').val();
+  // var total = $('#total_amount_paid').html();
+  var total = Number(salary) + Number(commuting_fee);
+  var health_insurance_fee = $('#health_insurance_fee').html();
+  var welfare_pension_insurance_fee = $('#welfare_pension_insurance_fee').html();
+  var employment_insurance_fee = $('#employment_insurance_fee').html();
+  var income_tax_fee = $('#income_tax_fee').html();
+  var care_insurance_fee = $('#care_insurance_fee').html();
+  var municipal_tax_fee = $('#municipal_tax_fee').val();
+  var price = total - health_insurance_fee - welfare_pension_insurance_fee - employment_insurance_fee - income_tax_fee - care_insurance_fee - municipal_tax_fee;
+  price = Math.round(price).toLocaleString();
+  price = '￥' + price;
+  $('#net_payment').html(price);
+}
+
+});
+
+</script>
+</body>
+</html>
