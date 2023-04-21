@@ -5,15 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <title>給与計算くん</title>
+  <!-- Bootstrapを読み込み -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 </head>
 <body>
+<!-- コンテイナーでJSも含んだ全体を囲う -->
 <div class="container">
   <h1 class="alert alert-primary mt-2 text-center">給与計算くん</h1>
+  <!--Jsを含まない部分を囲う  -->
   <div class="table-responsive">
+    <!-- 差引支給額までのテーブルを囲う -->
     <table class="table">
       <thead>
+        <!-- テーブルの見出し -->
         <tr>
           <th class="text-center">費目</th>
           <th class="text-center">金額</th>
@@ -21,8 +26,10 @@
         </tr>
       </thead>
       <tbody>
+        <!-- 給与計算のテーブル -->
         <tr>
           <th>給与</th>
+          <!-- formコントロールはどんな機能なのか？ -->
           <td><input type="text" name="salary" id="salary" class="form-control" value=""></td>
           <td></td>
         </tr>
@@ -33,22 +40,27 @@
         </tr>
         <tr>
           <th>総支給額</th>
+          <!-- このIDは何も表示されていないが計算されると表示される -->
           <td id="total_amount_paid"></td>
           <td></td>
         </tr>
         <tr>
           <th>健康保険</th>
+          <!-- このIDは何も表示されていないが計算されると表示されるのか？ -->
           <td id="health_insurance_fee"></td>
           <td id="health_insurance_name"></td>
         </tr>
         <tr>
           <th>厚生年金</th>
+          <!-- このIDは何も表示されていないが計算されると表示されるのか？ -->
           <td id="welfare_pension_insurance_fee"></td>
           <td id="welfare_pension_insurance_name"></td>
         </tr>
         <tr>
           <th>雇用保険</th>
+          <!-- このIDは何も表示されていないが計算されると表示されるのか？ -->
           <td id="employment_insurance_fee"></td>
+          <!-- このタグはどんな意味があるのか？リストで選択できるものか。-->
           <td><select name="employment_insurance" id="employment_insurance" class="form-control"></select></td>
         </tr>
         <tr>
@@ -69,6 +81,7 @@
         <tr>
           <th>住民税</th>
           <td><input type="text" id="municipal_tax_fee" class="form-control"></td>
+          <!-- 住民税はURLを引用しているが、計算式を引っ張っているのか？ -->
           <td><a href="https://juuminzei.com/keisan/" target="_blank" class="btn btn-primary">住民税を計算する</a></td>
         </tr>
         <tr class="netPayment">
@@ -81,6 +94,7 @@
   </div>
 </div>
 
+<!-- jQueryを引用、引用文が短いのはなぜか -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -91,10 +105,17 @@ $(function() {
 /**
   * 雇用保険セレクトボックス設定
   */
+ //jsonファイルをfileと定義した
 var file = 'json/employment_insurance.json';
+//getJSON形式にしたデータで取得
 $.getJSON(file, function(data) {
+  //dataに配列のdataを再代入しているのか？
   data = data['data'];
+  //forで繰り返している。dataを取得している？
   for (item in data){
+    //idの#employment_insuranceのセレクトボックスに動きを出しているのか？
+    //オプションはどこを意味しているのか？
+    //valで該当するコード番号の名前+fee1を表示する。
     $("#employment_insurance").append($("<option>").val(data[item]['code']).text(data[item]['name'] + '(' + data[item]['fee1'] + ')'));
   }
 });
@@ -102,9 +123,13 @@ $.getJSON(file, function(data) {
 /**
   * 介護保険セレクトボックス設定
   */
+ //雇用保険のところと同じ記載になっている。
 var file = 'json/generation.json';
+//jsonファイルにデータを入れているのか？→その通り、JSONファイルのデータから引っ張っている。
 $.getJSON(file, function(data) {
+  //鉤括弧内のdataは何？
   data = data['data'];
+  // 繰り返しdataオブジェクトから取得した変数itemに代入される。optionはどこから？
   for (item in data){
     $("#care_insurance").append($("<option>").val(data[item]['code']).text(data[item]['name']));
   }
@@ -113,6 +138,7 @@ $.getJSON(file, function(data) {
 /**
   * 扶養人数セレクトボックス設定
   */
+ //雇用保険の記載と同じになっている。
 var file = 'json/dependents_persons.json';
 $.getJSON(file, function(data) {
   data = data['data'];
@@ -124,8 +150,10 @@ $.getJSON(file, function(data) {
 /**
   * inputフィールドのフォーカス設定
   */
+ //住民税のテキストフォームにフォーカスしたときに背景色が変わる。引数のeは意味があるのか？？
 $('input[type=text]').focusin(function(e) {
   $(this).css('background-color', '#ffc');
+  //フォーカスが外れたときに色がなくなる
 }).focusout(function(e) {
   $(this).css('background-color', '');
 });
@@ -133,13 +161,21 @@ $('input[type=text]').focusin(function(e) {
 /**
   * 給与が変更されたら
   */
+ //給与欄の金額が変更されたら
 $('#salary').change(function() {
+  //総支給額計算関数
   totalAmountPaid();
+  //健康保険等級関数
   setHealthInsurance();
+  //厚生年金等級選択
   setWelfarePensionInsurance();
+  //雇用保険額設定
   setEmploymentInsurance();
+  //介護保険額設定
   setCareInsurance();
+  //所得税額設定のタイムアウト？
   setTimeout(function(){setIncomeTax();},100);
+  //差引支給額のタイムアウト？
   setTimeout(function(){netPayment();},100);
 });
 
@@ -152,6 +188,7 @@ $('#commuting_fee').change(function() {
   setWelfarePensionInsurance();
   setEmploymentInsurance();
   setCareInsurance();
+  //所得税額の設定→給与には出ずに、通勤費に出てきたのはなぜ？
   setIncomeTax();
   setTimeout(function(){setIncomeTax();},100);
   setTimeout(function(){netPayment();},100);
@@ -195,23 +232,37 @@ $('#municipal_tax_fee').change(function() {
 /**
   * 総支給額 計算
   */
+//総支給額を計算する関数→有名関数
 function totalAmountPaid(){
+  //給与額の値を代入する
   var salary = $('#salary').val();
+  //通勤費の値を代入する
   var commuting_fee = $('#commuting_fee').val();
+  //?Numberは何？
+  //給与額と通勤費の合計がtotalに入る。
   var total = Number(salary) + Number(commuting_fee);
+  //総支給額のIDに上の給与額+通勤費の合計が入る
   $('#total_amount_paid').html(total);
 }
 
 /**
   * 健康保険 等級 選択
   */
+//  健康保険を計算する関数→有名関数
 function setHealthInsurance(){
+  //給与額の値が定義される
   var salary = $('#salary').val();
+  // 通勤費の値が定義される
   var commuting_fee = $('#commuting_fee').val();
+  //Numberで数値にして給与額と通勤費の合計を求めたものを定義する。
   var total = Number(salary) + Number(commuting_fee);
+  //ここは何の名前なのか。後から名前を入れるのか？
   var name = "";
+  //ここの料金はなぜ０にしているのか？
   var fee = 0;
+  // このファイルはどこから持ってきているのか？
   var file = 'json/health_insurance.json';
+  //
   $.getJSON(file, function(data) {
     data = data['data'];
     for (item in data){

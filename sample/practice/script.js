@@ -1,5 +1,12 @@
-const pos1 = $('h1').offset();
-const pos2 = $('h1').position();
- 
-console.log( pos1 );
-console.log( pos2 );
+var friends = {
+  name: '太郎',
+  age: 20,
+  address: '東京都渋谷区○○○',
+  '母国語': '日本語'
+}
+
+for ( var list in friends){
+  if(friends.hasOwnProperty(list)){
+    if(friends[list]==='日本語')console.log(list);
+  }
+}
