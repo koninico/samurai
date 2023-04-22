@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>mebeeサンプル</title>
+  <!-- semantic.css  -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<style>
+  body>.grid {
+    height: 100%;
+  }
+</style>
+
+<body>
+  <div id="app" class="ui grid middle aligned">
+
+    <div class="row">
+      <div class="column">
+
+        <h2 class="ui gray header center aligned">{{val}}</h2>
+
+        <!-- ドラッグする要素 -->
+        <div @dragstart="foo" class="ui positive message container segment"
+          style="width: 200px; padding: 20px; margin-bottom: 10px; border: 1px dashed #333333;">
+          Hello Javascript!!
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <script>
+
+    const hoge = {
+      data() {
+        return {
+          val: ''
+        }
+      },
+      methods: {
+        foo: function (e) {
+          this.val = '開始されました'
+        }
+      }
+    }
+
+    Vue.createApp(hoge).mount('#app')
+
+  </script>
+</body>
+
+</html>
