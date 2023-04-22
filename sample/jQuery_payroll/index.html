@@ -60,7 +60,7 @@
           <th>雇用保険</th>
           <!-- このIDは何も表示されていないが計算されると表示されるのか？ -->
           <td id="employment_insurance_fee"></td>
-          <!-- このタグはどんな意味があるのか？リストで選択できるものか。-->
+          <!-- このselectタグはリストで選択できるようにするためにある。-->
           <td><select name="employment_insurance" id="employment_insurance" class="form-control"></select></td>
         </tr>
         <tr>
@@ -81,7 +81,7 @@
         <tr>
           <th>住民税</th>
           <td><input type="text" id="municipal_tax_fee" class="form-control"></td>
-          <!-- 住民税はURLを引用しているが、計算式を引っ張っているのか？ -->
+          <!-- 住民税はURLを引用しているが、計算式を引っ張っているのか？→計算できるURLにアクセスするためにある -->
           <td><a href="https://juuminzei.com/keisan/" target="_blank" class="btn btn-primary">住民税を計算する</a></td>
         </tr>
         <tr class="netPayment">
@@ -109,15 +109,17 @@ $(function() {
 var file = 'json/employment_insurance.json';
 //getJSON形式にしたデータで取得
 $.getJSON(file, function(data) {
-  //dataに配列のdataを再代入しているのか？
+  //変数dataに配列のJSONファイルにあるdataを再代入している
   data = data['data'];
-  //forで繰り返している。dataを取得している？
+  //forで繰り返している。上で代入した変数dataをitem変数に繰り返し代入している
   for (item in data){
     //idの#employment_insuranceのセレクトボックスに動きを出しているのか？
     //オプションはどこを意味しているのか？
     //valで該当するコード番号の名前+fee1を表示する。
     $("#employment_insurance").append($("<option>").val(data[item]['code']).text(data[item]['name'] + '(' + data[item]['fee1'] + ')'));
-  }
+    }
+    // ここのログでfee2も取得しているのはなぜか？
+    // console.log(data[item]);
 });
 
 /**
@@ -127,7 +129,7 @@ $.getJSON(file, function(data) {
 var file = 'json/generation.json';
 //jsonファイルにデータを入れているのか？→その通り、JSONファイルのデータから引っ張っている。
 $.getJSON(file, function(data) {
-  //鉤括弧内のdataは何？
+  //鉤括弧内のdataは何？→JSONファイルのデータの配列を取得している
   data = data['data'];
   // 繰り返しdataオブジェクトから取得した変数itemに代入される。optionはどこから？
   for (item in data){
@@ -143,7 +145,10 @@ var file = 'json/dependents_persons.json';
 $.getJSON(file, function(data) {
   data = data['data'];
   for (item in data){
+    // ここは扶養人数の選択肢（リストj）を作成している。
     $("#dependents_persons").append($("<option>").val(data[item]['code']).text(data[item]['name']));
+      // ここはcodeとnameを出力している
+      console.log(data[item]);
   }
 });
 
@@ -238,7 +243,7 @@ function totalAmountPaid(){
   var salary = $('#salary').val();
   //通勤費の値を代入する
   var commuting_fee = $('#commuting_fee').val();
-  //?Numberは何？
+  //?Numberは何？→数値の値として扱う時につけるもの
   //給与額と通勤費の合計がtotalに入る。
   var total = Number(salary) + Number(commuting_fee);
   //総支給額のIDに上の給与額+通勤費の合計が入る
@@ -260,17 +265,22 @@ function setHealthInsurance(){
   var name = "";
   //ここの料金はなぜ０にしているのか？
   var fee = 0;
-  // このファイルはどこから持ってきているのか？
+  // JSONファイルを変数fileに代入している
   var file = 'json/health_insurance.json';
   //
   $.getJSON(file, function(data) {
     data = data['data'];
     for (item in data){
+      // totalの数値がupで設定された数値以上で、かつdown未満である場合はnameの数値とhalffee１を出力する
+      // ここの動きはtrueになるまで繰り返すのか？一通り全部のコード番号に該当するかを繰り返すのか？
       if (Number(data[item]['up']) <= total && total < Number(data[item]['down'])) {
         name = data[item]['name'];
         fee = data[item]['feeHalf1'];
+        // ここでログが取れないのはなぜ？
+        console.log(data[item]);
       }
     }
+    // ここは最初に該当したnameとfeeを出力する
     $('#health_insurance_name').html(name);
     $('#health_insurance_fee').html(fee);
   });
@@ -304,19 +314,29 @@ function setWelfarePensionInsurance(){
   * 雇用保険額 設定
   */
 function setEmploymentInsurance(){
+  //給与に表示された金額を取得してsalaryに代入している
   var salary = $('#salary').val();
+  //通勤に表示された金額を取得してsalaryに代入している
   var commuting_fee = $('#commuting_fee').val();
+  //給与額と通勤費を合計してtotalに代入する
   var total = Number(salary) + Number(commuting_fee);
+  //雇用保険率の値を取得してcodeに代入
   var code = $('#employment_insurance').val();
+  //feeを０として代入
   var fee = 0;
+  //JSONファイルの内容をfileに代入
   var file = 'json/employment_insurance.json';
+  //JSONファイルを
   $.getJSON(file, function(data) {
     data = data['data'];
+    console.log(data);
+    //itemという配列を作っているのか？
     for (item in data){
       if (code == data[item]['code']) {
         fee = data[item]['fee1'];
       }
     }
+    //Math.roundで四捨五入している
     var price = Math.round(total * fee);
     $('#employment_insurance_fee').html(price);
   });
