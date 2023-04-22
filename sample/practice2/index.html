@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>vue</title>
+  </head>
+  <body>
+    <div id="demo">
+      <p class="title">zipcode to address demo</p>
+      <input v-model="inputZip" :placeholder="computedZip" v-on:keypress.enter="getAddress(computedZip)" maxlength="7">
+      <button @click="getAddress(computedZip)">boom</button>
+      <div class="result">
+      <transition name="trans">
+        
+          <p class="res":key="results">{{results}}</p>
+      <!--  {{inputZip | filterZip}} -->
+      </transition>
+      </div>  
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+

@@ -134,6 +134,7 @@ $.getJSON(file, function(data) {
   // 繰り返しdataオブジェクトから取得した変数itemに代入される。optionはどこから？
   for (item in data){
     $("#care_insurance").append($("<option>").val(data[item]['code']).text(data[item]['name']));
+      console.log(data[item]);
   }
 });
 
