@@ -56,10 +56,10 @@ declare(strict_types=1);
 
       <p>
         <?php 
-        function type_hinting_argument(int $num){
+        function type_hinting_argument($num){
           return $num * 2;
         }
-        echo type_hinting_argument(1);
+        echo type_hinting_argument(1.618);
         
         ?>
       </p>
