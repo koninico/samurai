@@ -1,3 +1,11 @@
+<?php 
+  // ini_set('display_errors',1);
+?>
+
+<?php 
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 

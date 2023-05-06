@@ -1,0 +1,67 @@
+.box-wrapper {
+  position: relative;
+  max-width: 600px;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.text {
+  padding: 20px;
+}
+
+.box {
+  width: 100%;
+}
+
+/* 落ち葉 */
+.item {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 15px;
+  height: 20px;
+  margin: 0 auto;
+  border-radius: 0% 70%;
+  background: #914928;
+  opacity: 0;
+}
+
+@keyframes fall {
+  from {
+    opacity: 0;
+    top: -50px;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 1;
+    top: 100vh;
+  }
+}
+
+@keyframes sway1 {
+  from {
+    transform: translate3d(0px, 0px, 0px) rotate(0deg);
+  }
+
+  25% {
+    transform: translate3d(-50px, 0px, 0px) rotate(-10deg);
+  }
+
+  75% {
+    transform: translate3d(50px, 0px, 0px) rotate(10deg);
+  }
+
+  to {
+    transform: translate3d(0px, 0px, 0px) rotate(0deg);
+  }
+}
+
+.js-scroll-fall.is-animated .item {
+  animation: fall 4s linear forwards, sway1 4s ease-in-out alternate;
+  animation-delay: 0.3s;/* アニメーション遅延で個々のアニメーション開始をずらしたい場合、数値を変えてつける */
+}
