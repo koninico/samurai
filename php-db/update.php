@@ -39,8 +39,8 @@ if(isset($_GET['id'])){
     try{
       $pdo = new PDO($dsn,$user,$password);
       // ４２行目はGETで取り出された（？）idを抽出して変数$sqlに代入したという意味？ここで取り出されるidは一つなのか？
-      $spl = 'SELECT * FROM users WHERE id = :id';
-      $stmt = $pdo->prepare($spl);
+      $sql = 'SELECT * FROM users WHERE id = :id';
+      $stmt = $pdo->prepare($sql);
       // :idというプレースホルダ（仮置き）にGET[id]を正数型で入れ込む。
       $stmt->bindValue(':id',$_GET['id'],PDO::PARAM_INT);
 
@@ -56,6 +56,14 @@ if(isset($_GET['id'])){
       exit($e->getMessage());
     }
 }else{
+
+
+
+
+
+
+
+  
   exit('idパラメータの値は存在しません。');
 }
 ?>
