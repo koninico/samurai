@@ -8,7 +8,6 @@ p {
 }
 /* PC用のスタイル */
 @media screen and (min-width: 768px){
-  
   body {
     max-width: 1080px;
     min-width: 960px;
@@ -458,6 +457,188 @@ footer {
    color: #ffffff;
    float: right;
  }
+
+#mission-main{
+  height: 496px;
+  width: 100%;
+  background-image: url("images/mission/mission-main.png");
+  background-repeat: no-repeat;
+  background-position-y: center;
+}
+#mission-title {
+  background-color: #2710d5;
+  width: 368px;
+  color: #ffffff;
+  height: 496px;
+  border-radius: 0 248px 248px 0;
+  position: relative;
+}
+ #mission-title > h1{
+  position: absolute;
+  top:0;
+  left:100px;
+  font-size:80px;
+ }
+
+ #mission-title > span {
+  position: absolute;
+  top:200px;
+  left:100px;
+  font-size: 26px;
+ }
+
+ #mission-title > div{
+  position: absolute;
+  top:350px;
+  left:100px;
+  font-size: 16px;
+ }
+
+ #mission-s2dgs {
+  width: 100%;
+  margin: 20px;
+ }
+
+ .mission-h2{
+  color: #2710d5;
+  font-size: 40px;
+ }
+
+ .mission-h2::after{
+  content:none;
+ }
+
+ #mission-5goals{
+  margin: 20px;
+  display: flex;
+ }
+
+ #mission-5goals > div{
+  flex-grow: 1;
+  padding: 20px;
+ }
+ #mission-5goals > div >div{
+  margin-bottom: 40px;
+ }
+
+ .fivegoals-image-right{
+  float:right;
+  margin: 20px;
+ }
+
+ .fivegoals-image-left{
+  float: left;
+  margin: 20px;
+ }
+
+ .fivegoals-number {
+  color: #2710d5;
+  font-size: 48px;
+  margin: 0;
+ }
+
+ .fivegoals-h3{
+  font-size: 28px;
+  margin: 0;
+ }
+
+ .fivegoals-p{
+  margin: 0;
+ }
+
+ /* PC用PRODUCTペーシ */
+#product-main{
+  height: 496px;
+  width: 100%;
+  background-image: url("images/product/product-main.png");
+  background-repeat: no-repeat;
+  background-position-y: center;
+}
+
+#product-title{
+  background-color: #2710d5;
+  width: 368px;
+  color: #ffffff;
+  height: 496px;
+  border-radius: 0 248px 248px 0;
+  position: relative;
+}
+
+#product-title > h1 {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  font-size: 80px;
+}
+
+#product-title > span {
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  font-size: 26px;
+}
+
+#product-title > div{
+  position: absolute;
+  top: 350px;
+  left: 100px;
+  font-size: 16px;
+}
+
+/* セクション１ */
+.product-section1{
+  position: relative;
+  margin: 20px;
+  height: 340px;
+}
+
+.product-section1 > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 450px;
+  margin: 0 40px 30px 0;
+  border-radius: 0 432px 0 0;
+}
+
+.product-section1 > div {
+  position: absolute;
+  top: 0;
+  left: 480px;
+}
+
+.product-section2{
+  position: relative;
+  margin: 20px;
+  height: 340px;
+}
+
+.product-section2 > img {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  width: 450px;
+  margin: 0 0 30px 40px;
+  border-radius: 432px 0 0 0;
+}
+
+.product-section2 > div {
+  width: 500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.product-h2{
+  color: #2710d5;
+  font-size: 24px;
+  margin: 0;
+}
+
+.product-h3{
+  font-size: 28px;
+  margin: 0;
+}
 }
   /*====================
   スマートフォン用のスタイル
@@ -811,7 +992,6 @@ footer {
     height: 240px;
     margin-top: 40px;
   }
-} 
 
 /* contact */
 #contact{
@@ -914,3 +1094,175 @@ footer {
   margin-top: 30px;
   color: #ffffff;
 }
+
+#mission-main{
+  height: 256px;
+  width: 100%;
+  background-image: url("images/mission/mission-main.png");
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-size: auto 208px;
+}
+
+#mission-title{
+  background-color: #2710d5;
+  width: 136px;
+  color: #ffffff;
+  height: 256px;
+  border-radius: 0 248px 248px 0;
+  position: relative;
+}
+
+#mission-title > h1{
+  position: absolute;
+  top: 0;
+  left: 20px;
+  font-size: 40px;
+}
+
+#mission-title > span {
+  position: absolute;
+  top:110px;
+  left: 20px;
+  font-size: 18px;
+}
+
+#mission-title > div {
+  position: absolute;
+  top: 180px;
+  left: 20px;
+  font-size: 13px;
+}
+
+#mission-s2dgs{
+  margin: 20px;
+}
+
+.mission-h2{
+  color: #2710d5;
+  font-size: 38px;
+  margin: 0px;
+}
+
+.mission-h2::after{
+  content: none;
+}
+
+#mission-s2dgs > img {
+  width: 100%;
+}
+
+#mission-5goals {
+  margin: 20px;
+}
+
+#mission-5goals > div > div {
+  margin-bottom: 40px;
+}
+
+#s2dgs-image{
+  width: 100%;
+}
+
+.fivegoals-image-right{
+  margin: 20px auto;
+  display: block;
+}
+
+.fivegoals-image-left{
+  margin: 20px auto;
+  display: block;
+}
+
+.fivegoals-number{
+  color: #2710d5;
+  font-size: 48px;
+  margin: 0;
+}
+
+.fivegoals-h3{
+  font-size: 28px;
+  margin: 0;
+}
+
+.fivegoals-p{
+  margin: 0;
+}
+
+/* product */
+#product-main{
+  height: 256px;
+  width: 100%;
+  background-image: url("images/product/product-main.png");
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-size: auto 208px;
+}
+
+#product-title{
+  background-color: #2710d5;
+  width: 136px;
+  color: #ffffff;
+  height: 256px;
+  border-radius: 0 248px 248px 0;
+  position: relative;
+}
+
+#product-title > h1 {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  font-size: 40px;
+}
+
+#product-title > span {
+  position: absolute;
+  top: 110px;
+  left: 20px;
+  font-size: 18px;
+}
+
+#product-title > div {
+  position: absolute;
+  top: 180px;
+  left: 20px;
+  font-size: 13px;
+}
+
+.product-section1{
+  margin: 20px;
+}
+
+.product-section1 > img{
+  width: 100%;
+  border-radius: 0 300px 0 0 ;
+}
+
+.product-section2{
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-section2 > img {
+  order: 1;
+  width: 100%;
+  border-radius: 300px 0 0 0;
+}
+
+.product-section2 > div{
+  order: 2;
+}
+
+.product-h2{
+  color: #2710d5;
+  font-size: 24px;
+  margin: 0;
+}
+
+.product-h3{
+  font-size: 28px;
+  margin: 0;
+}
+
+} 
