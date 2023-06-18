@@ -1,33 +1,25 @@
+/* PC,スマホ共通スタイル */
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Source Sans Pro", "Hiragino Kaku Gothic ProN", Meiryo, Arial, sans-serif;
 }
 
-h1, h2 {
-  font-weight: bold;
+/* ===============
+   PC用のスタイル
+   =============== */
+   /* 横幅設定 */
+body {
+  width: 100%;
+  margin: 0 auto 0 auto;
 }
-
-p {
-  line-height: 1.5;
-}
-
 header {
-  padding: 20px;
+  padding-top: 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-}
-
-h1 {
-  font-size: 24px;
-  font-weight: bold;
 }
 
 nav ul {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   display: flex;
 }
 
@@ -44,7 +36,17 @@ nav ul li a {
 /* コンテンツセクション */
 .content {
   text-align: center;
-  margin-top: 20px;
+  margin-left: 20%;
+  margin-right: 20%;
+  align-items: center;
+}
+
+.top img {
+  width: 100%;
+}
+
+.content p {
+  
 }
 
 .blue-underline {
@@ -60,7 +62,7 @@ nav ul li a {
 }
 
 .business-block img {
-  max-width: 200px;
+  max-width: 400px;
   margin-right: 20px;
 }
 
