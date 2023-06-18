@@ -1,5 +1,5 @@
 function clickTest() {
-  target = document.getElementById("anime_test");
+  const target = document.getElementById("anime_test");
   if (target.className == null || target.className=="") {
     target.className = "active";
   } else {
