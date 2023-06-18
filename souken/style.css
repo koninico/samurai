@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+  font-weight: bold;
+}
+
+p {
+  line-height: 1.5;
+}
+
+header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+}
+
+/* コンテンツセクション */
+.content {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.blue-underline {
+  display: inline-block;
+  padding-bottom: 5px;
+  border-bottom: 2px solid blue;
+}
+
+.business-block {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.business-block img {
+  max-width: 200px;
+  margin-right: 20px;
+}
+
+footer {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
