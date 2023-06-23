@@ -11,22 +11,23 @@ class PostController extends Controller
 {
     //一覧ページ
     public function index(){
-        $posts = Post::latest()->get();
+        $posts = Post::orderBy('created_at','asc')->get();
 
         return view('posts.index',compact('posts'));
     }
 
     //作成ページ
     public function create(){
+
         return view('posts.create');
     }
 
     //作成機能
     public function store(Request $request){
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-        ]);
+            'title'=> 'required|max:40',
+            'content' => 'required|max:200',
+        ]);;
 
         $post = new Post();
         $post->title = $request->input('title');
@@ -49,13 +50,13 @@ class PostController extends Controller
     //更新機能
     public function update(Request $request, Post $post){
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
+            'title'=> 'required|max:40',
+            'content' => 'required|max:200',
         ]);
 
         $post->title = $request->input('title');
         $post->content = $request->input('content');
-        $post->updated_at = $request->input('updated_at');
+        $post->created_at = $request->input('created_at');
         $post->save();
 
         return redirect()->route('posts.show',$post)->with('flash_message','投稿を編集しました。');
