@@ -55,15 +55,39 @@ nav ul li a {
   border-bottom: 2px solid blue;
 }
 
-.business-block {
+.business-block-flex {
   display: flex;
   align-items: center;
   margin-top: 20px;
 }
 
 .business-block img {
-  max-width: 400px;
+  width: 50%;
   margin-right: 20px;
+}
+
+/* 会社概要 */
+.company{
+  margin: 80px auto 80px auto;
+}
+
+#company-table {
+  width: 100%;
+}
+
+.tableheader {
+  text-align: left;
+  padding: 20px;
+  border-bottom-color: #2710d5;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  width: 100px;
+}
+
+.tableheader-first {
+  border-top-color: #2710d5;
+  border-top-width: 1px;
+  border-top-style: solid;
 }
 
 footer {
