@@ -20,10 +20,10 @@
         </ul>
       </div>
     @endif
-    
+
     <!-- 目標の追加用モーダル -->
     @include('modals.add_goal')
-    
+
     <!-- タグの追加用モーダル -->
     @include('modals.add_tag')
 
@@ -81,7 +81,7 @@
                               <div class="d-flex justify-content-between align-items-center mb-2">
                                 <h5 class="card-title ms-1 mb-0">
                                     @if($todo->done)
-                                        <s>{{ $todo->content}}</s>
+                                        <s>{{ $todo->content}}</s><br>
                                     @else
                                         {{ $todo->content}}
                                     @endif
@@ -103,13 +103,24 @@
                                                 @endif
                                             </form>
                                         </li>
-                                    
+
                                         <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTodoModal{{ $todo->id }}">編集</a></li>
                                         <div class="dropdown-divider"></div>
                                         <li><a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteTodoModal{{ $todo->id }}">削除</a></li>
                                     </ul>
                                 </div>
                               </div>
+
+                              <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="card-title ms-1 mb-0">
+                                    @if($todo->done)
+                                        <s>{{ $todo->description}}</s>
+                                    @else
+                                        {{ $todo->description}}
+                                    @endif
+                                </h6>
+                              </div>
+
                               <h6 class="card-subtitle ms-1 mb-1 text-muted">{{ $todo->created_at }}</h6>
                               <div class="d-flex flex-wrap mx-1 mb-1">
                                 @foreach ($todo->tags()->orderBy('id','asc')->get() as $tag)
@@ -118,10 +129,10 @@
                                 </div>
                             </div>
                       </div>
-                  @endforeach  
+                  @endforeach
               </div>
           </div>
         @endforeach
     </div>
   </div>
-@endsection  
+@endsection

@@ -23,6 +23,7 @@ class TodoController extends Controller
 
         $todo = new Todo();
         $todo->content = $request->input('content');
+        $todo->content = $request->input('description');
         $todo->user_id = Auth::id();
         $todo->goal_id = $goal->id;
         $todo->done = false;
@@ -46,6 +47,7 @@ class TodoController extends Controller
         ]);
 
         $todo->content = $request->input('content');
+        $todo->description = $request->input('description');
         $todo->user_id = Auth::id();
         $todo->goal_id = $goal->id;
         $todo->done = $request->boolean('done',$todo->done);
@@ -54,8 +56,8 @@ class TodoController extends Controller
         //完了と未完了の切り替え時でないとき（通常の編集時）にのみがぐを変更する
         if (!$request->has('done')) {
             $todo->tags()->sync($request->input('tag_ids'));
-        };        
-        
+        };
+
         return redirect()->route('goals.index');
     }
 

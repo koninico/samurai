@@ -9,7 +9,10 @@
                 @csrf
                 @method('patch')
                 <div class="modal-body">
+                    <h5 class="modal-title" >ToDo</h5>
                     <input type="text" class="form-control" name="content" value="{{$todo->content}}">
+                    <h5 class="modal-title" >詳細</h5>
+                    <input type="text" class="form-control" name="description" value="{{$todo->description}}">
                     <div class="d-flex flex-wrap">
                         @foreach($tags as $tag)
                             <label>
@@ -19,7 +22,7 @@
                                     @else
                                         <input type="checkbox" name="tag_ids[]" value="{{ $tag->id }}">
                                     @endif
-                                    <span class="badge bg-secondary ms-1 fw-light">{{ $tag->name }}</span>                                    
+                                    <span class="badge bg-secondary ms-1 fw-light">{{ $tag->name }}</span>
                                 </div>
                             </label>
                         @endforeach
