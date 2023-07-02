@@ -8,7 +8,7 @@ module.exports = {
   // ミニファイ対象
   purge:[
     "./index.html"
-  ]
+  ],
 
   theme: {
     // デフォルト値の継承と上書き
